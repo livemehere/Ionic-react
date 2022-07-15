@@ -33,33 +33,46 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import List from "./pages/List";
 import Settings from "./pages/Settings";
+import { useState } from "react";
+import Login from "./pages/Login";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonTabBar slot={"bottom"}>
-          <IonTabButton tab="home" href="/home">
-            <IonLabel>HOME</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="list" href="/list">
-            <IonLabel>TODO</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="settings" href="/settings">
-            <IonLabel>settings</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-        <IonRouterOutlet>
-          <Route exact path="/list" component={List} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/settings" component={Settings} />
+const App: React.FC = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
+  return (
+    <IonApp>
+      {isLogin ? (
+        <IonReactRouter>
+          <IonTabs>
+            <IonTabBar slot={"bottom"}>
+              <IonTabButton tab="home" href="/home">
+                <IonLabel>HOME</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="list" href="/list">
+                <IonLabel>TODO</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="settings" href="/settings">
+                <IonLabel>settings</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+            <IonRouterOutlet>
+              <Route exact path="/list" component={List} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/settings" component={Settings} />
+              <Redirect exact from={"/"} to={"/home"} />
+            </IonRouterOutlet>
+          </IonTabs>
+        </IonReactRouter>
+      ) : (
+        <IonReactRouter>
+          <Route exact path="/home" component={Login} />
           <Redirect exact from={"/"} to={"/home"} />
-        </IonRouterOutlet>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+        </IonReactRouter>
+      )}
+    </IonApp>
+  );
+};
 
 export default App;
