@@ -2,13 +2,21 @@ import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonContent,
+  IonHeader,
   IonIcon,
+  IonItem,
   IonLabel,
+  IonList,
+  IonListHeader,
+  IonMenu,
+  IonMenuToggle,
   IonRouterOutlet,
   IonTab,
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonTitle,
+  IonToolbar,
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -34,7 +42,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import List from "./pages/List";
 import Settings from "./pages/Settings";
-import { useState } from "react";
+import React, { useState } from "react";
 import Login from "./pages/Login";
 import { home, list, settings } from "ionicons/icons";
 
@@ -46,30 +54,32 @@ const App: React.FC = () => {
   return (
     <IonApp>
       {isLogin ? (
-        <IonReactRouter>
-          <IonTabs>
-            <IonTabBar slot={"bottom"}>
-              <IonTabButton tab="home" href="/home">
-                <IonIcon icon={home} />
-                <IonLabel>HOME</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="list" href="/list">
-                <IonIcon icon={list} />
-                <IonLabel>TODO</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="settings" href="/settings">
-                <IonIcon icon={settings} />
-                <IonLabel>settings</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-            <IonRouterOutlet>
-              <Route exact path="/list" component={List} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/settings" component={Settings} />
-              <Redirect exact from={"/"} to={"/home"} />
-            </IonRouterOutlet>
-          </IonTabs>
-        </IonReactRouter>
+        <>
+          <IonReactRouter>
+            <IonTabs>
+              <IonTabBar slot={"bottom"}>
+                <IonTabButton tab="home" href="/home">
+                  <IonIcon icon={home} />
+                  <IonLabel>HOME</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="list" href="/list">
+                  <IonIcon icon={list} />
+                  <IonLabel>TODO</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="settings" href="/settings">
+                  <IonIcon icon={settings} />
+                  <IonLabel>settings</IonLabel>
+                </IonTabButton>
+              </IonTabBar>
+              <IonRouterOutlet>
+                <Route exact path="/list" component={List} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/settings" component={Settings} />
+                <Redirect exact from={"/"} to={"/home"} />
+              </IonRouterOutlet>
+            </IonTabs>
+          </IonReactRouter>
+        </>
       ) : (
         <IonReactRouter>
           <Route exact path="/home" component={Login} />
