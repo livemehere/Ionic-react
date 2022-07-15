@@ -2,6 +2,7 @@ import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonContent,
+  IonIcon,
   IonLabel,
   IonRouterOutlet,
   IonTab,
@@ -35,6 +36,7 @@ import List from "./pages/List";
 import Settings from "./pages/Settings";
 import { useState } from "react";
 import Login from "./pages/Login";
+import { home, list, settings } from "ionicons/icons";
 
 setupIonicReact();
 
@@ -48,12 +50,15 @@ const App: React.FC = () => {
           <IonTabs>
             <IonTabBar slot={"bottom"}>
               <IonTabButton tab="home" href="/home">
+                <IonIcon icon={home} />
                 <IonLabel>HOME</IonLabel>
               </IonTabButton>
               <IonTabButton tab="list" href="/list">
+                <IonIcon icon={list} />
                 <IonLabel>TODO</IonLabel>
               </IonTabButton>
               <IonTabButton tab="settings" href="/settings">
+                <IonIcon icon={settings} />
                 <IonLabel>settings</IonLabel>
               </IonTabButton>
             </IonTabBar>
